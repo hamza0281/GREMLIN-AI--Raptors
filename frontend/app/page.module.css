@@ -112,19 +112,19 @@
 
 /* ── Hero Title ── */
 .heroTitle {
-  line-height: 0.9;
+  font-family: var(--font-display);
+  font-size: clamp(50px, 8vw, 110px);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1;
   margin-bottom: 24px;
   animation: fadeSlideDown 0.8s ease 0.2s both;
-  overflow: visible;
-  position: relative;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
 }
 
-.heroTitleTop {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(44px, 6.5vw, 90px);
-  font-weight: 900;
-  letter-spacing: -2px;
+.heroTitleMain {
   background: linear-gradient(160deg, #ffffff 0%, #00f0ff 60%, #0088aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -132,30 +132,14 @@
   filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.2));
 }
 
-.heroTitleBottom {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(44px, 6.5vw, 90px);
-  font-weight: 900;
-  letter-spacing: -2px;
-  margin-top: -6px;
-  line-height: 1;
-}
-
-.heroDash {
-  background: linear-gradient(160deg, #ff4466 0%, #ff0040 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .heroAI {
   background: linear-gradient(160deg, #ff4466 0%, #ff0040 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 30px rgba(255, 0, 64, 0.3));
+  filter: drop-shadow(0 0 30px rgba(255, 0, 64, 0.4));
   animation: aiPulse 3s ease-in-out infinite;
+  margin-left: 4px;
 }
 
 @keyframes aiPulse {
@@ -269,45 +253,9 @@
 .heroCTA {
   display: flex;
   gap: 12px;
-  align-items: stretch;
-  margin-bottom: 14px;
-  animation: fadeSlideDown 0.9s ease 0.5s both;
-}
-
-.heroInputWrap {
-  flex: 1;
-  display: flex;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.heroInputWrap:focus-within {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-}
-
-.heroInputPrefix {
-  display: flex;
   align-items: center;
-  padding: 0 14px;
-  background: rgba(0, 240, 255, 0.05);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--neon-cyan);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  border-right: 1px solid rgba(0, 240, 255, 0.1);
-}
-
-.heroInput {
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  flex: 1;
-  min-width: 0;
-  font-size: 13px !important;
+  margin-bottom: 20px;
+  animation: fadeSlideDown 0.9s ease 0.5s both;
 }
 
 /* ── Hero Launch Button ── */
@@ -315,33 +263,27 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 28px;
-  background: linear-gradient(135deg, rgba(255, 0, 64, 0.15) 0%, rgba(255, 0, 64, 0.08) 100%);
+  gap: 12px;
+  padding: 18px 42px;
+  background: linear-gradient(135deg, rgba(255, 0, 64, 0.2) 0%, rgba(255, 0, 64, 0.05) 100%);
   border: 1px solid var(--neon-red);
   border-radius: var(--radius-md);
   color: var(--neon-red);
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.heroLaunchBtn:hover:not(:disabled) {
-  background: rgba(255, 0, 64, 0.2);
-  box-shadow: 0 0 30px rgba(255, 0, 64, 0.25), 0 0 60px rgba(255, 0, 64, 0.1);
+.heroLaunchBtn:hover {
+  background: rgba(255, 0, 64, 0.3);
+  box-shadow: 0 0 40px rgba(255, 0, 64, 0.3), 0 0 80px rgba(255, 0, 64, 0.15);
   transform: translateY(-2px);
   color: #fff;
-}
-
-.heroLaunchBtn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
 }
 
 .btnGlow {

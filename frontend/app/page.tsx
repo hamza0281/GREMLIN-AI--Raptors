@@ -160,11 +160,8 @@ export default function Home() {
 
           {/* ── Main Title ── */}
           <h1 className={styles.heroTitle}>
-            <span className={styles.heroTitleTop}>GREMLIN</span>
-            <span className={styles.heroTitleBottom}>
-              <span className={styles.heroDash}>—</span>
-              <span className={styles.heroAI}>AI</span>
-            </span>
+            <span className={styles.heroTitleMain}>GREMLIN</span>
+            <span className={styles.heroAI}>-AI</span>
           </h1>
 
           {/* ── Hero Tagline ── */}
@@ -176,9 +173,7 @@ export default function Home() {
 
           {/* ── Sub description ── */}
           <p className={styles.heroDesc}>
-            A <strong className="text-cyan">0.5B model's hallucinations</strong> are its superpower —
-            not a flaw. Feed it your app. Watch it find bugs{" "}
-            <strong className="text-red">ChatGPT never would.</strong>
+            Deploy an army of autonomous <strong className="text-cyan">AI agents</strong>. They click, they crash, and they expose critical vulnerabilities—so your real users never have to.
           </p>
 
           {/* ── Feature Pills ── */}
@@ -198,28 +193,14 @@ export default function Home() {
 
           {/* ── Hero CTA ── */}
           <div className={styles.heroCTA}>
-            <div className={styles.heroInputWrap}>
-              <div className={styles.heroInputPrefix}>TARGET://</div>
-              <input
-                type="text"
-                className={`neon-input ${styles.heroInput}`}
-                placeholder="https://your-webapp.com"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && launchScan()}
-              />
-            </div>
             <button
               id="hero-launch-btn"
               className={styles.heroLaunchBtn}
-              onClick={launchScan}
-              disabled={!url.trim() || isLaunching}
+              onClick={() => {
+                document.querySelector(`.${styles.launchSection}`)?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
-              {isLaunching ? (
-                <><span className={styles.btnSpinner} />SUMMONING...</>
-              ) : (
-                <>👾 SUMMON THE GREMLINS</>
-              )}
+              ⚡ INITIATE CHAOS SEQUENCE
               <span className={styles.btnGlow} />
             </button>
           </div>
