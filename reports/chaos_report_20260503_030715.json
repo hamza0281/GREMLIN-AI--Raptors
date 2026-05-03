@@ -1,0 +1,156 @@
+{
+  "scan_id": "6d8498aa",
+  "timestamp": "2026-05-03T03:07:15.186867",
+  "target_url": "http://localhost:8899",
+  "duration_seconds": 48.43484544754028,
+  "total_actions": 13,
+  "pages_scanned": 1,
+  "model_used": "qwen2.5:0.5b",
+  "summary": {
+    "total_bugs": 6,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 6
+  },
+  "bugs": [
+    {
+      "bug_id": "CHAOS-0001",
+      "severity": "low",
+      "category": "validation",
+      "title": "Email field 'Email Address' accepted non-email input",
+      "description": "The email field accepted '阿拉伯语, 粤语, 智利语, 亚利桑那语, 泰米尔语, 哈萨克语, 德语, 罗马化, 国际象棋, 英语，英语用法区，请翻译，以适应您的电子邮件系统，您可以通过设' which is not a valid email. Consider adding email format validation.",
+      "persona_name": "The International Traveler",
+      "persona_icon": "🌍",
+      "element_name": "Email Address",
+      "chaos_input": "阿拉伯语, 粤语, 智利语, 亚利桑那语, 泰米尔语, 哈萨克语, 德语, 罗马化, 国际象棋, 英语，英语用法区，请翻译，以适应您的电子邮件系统，您可以通过设置在每个国家，语言，或功能，如移动应用等以适应不同的标准。例如，将电子邮件地址设置为拉丁字母和阿拉伯数字，可以防止被某些程序错误处理。",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Email Address' element",
+        "3. Fill with input: `阿拉伯语, 粤语, 智利语, 亚利桑那语, 泰米尔语, 哈萨克语, 德语, 罗马化, 国际象棋, 英语，英语用法区，请翻译，以适应您的电子邮件系统，您可以通过设置在每个国家，语言，或功能，如移动应用等`",
+        "4. Observe: Email field 'Email Address' accepted non-email input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0002",
+      "severity": "low",
+      "category": "validation",
+      "title": "Email field 'Email Address' accepted non-email input",
+      "description": "The email field accepted 'Hello! My name is _____, and I like _____. Where are you ____?' which is not a valid email. Consider adding email format validation.",
+      "persona_name": "The Confused Grandma",
+      "persona_icon": "👵",
+      "element_name": "Email Address",
+      "chaos_input": "Hello! My name is _____, and I like _____. Where are you ____?",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Email Address' element",
+        "3. Fill with input: `Hello! My name is _____, and I like _____. Where are you ____?`",
+        "4. Observe: Email field 'Email Address' accepted non-email input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0003",
+      "severity": "low",
+      "category": "validation",
+      "title": "Numeric field 'Age' accepted non-numeric input",
+      "description": "The numeric field accepted 'I'm sorry, I don't have the ability to overthink things like that. However, I ca' which is not a number. Consider adding numeric validation.",
+      "persona_name": "The Overthinking Dev",
+      "persona_icon": "🤓",
+      "element_name": "Age",
+      "chaos_input": "I'm sorry, I don't have the ability to overthink things like that. However, I can help you create a new text based on your instructions. Could you please provide more details or a specific task?",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Age' element",
+        "3. Fill with input: `I'm sorry, I don't have the ability to overthink things like that. However, I can help you create a `",
+        "4. Observe: Numeric field 'Age' accepted non-numeric input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0004",
+      "severity": "low",
+      "category": "validation",
+      "title": "Numeric field 'Age' accepted non-numeric input",
+      "description": "The numeric field accepted 'यान वाजय, उद्यमी। हानि करणाऱू। सैन बूले नगर शायद आनंडा।' which is not a number. Consider adding numeric validation.",
+      "persona_name": "The International Traveler",
+      "persona_icon": "🌍",
+      "element_name": "Age",
+      "chaos_input": "यान वाजय, उद्यमी। हानि करणाऱू। सैन बूले नगर शायद आनंडा।",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Age' element",
+        "3. Fill with input: `यान वाजय, उद्यमी। हानि करणाऱू। सैन बूले नगर शायद आनंडा।`",
+        "4. Observe: Numeric field 'Age' accepted non-numeric input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0005",
+      "severity": "low",
+      "category": "validation",
+      "title": "URL field 'Website URL' accepted non-URL input",
+      "description": "The URL field accepted '/HelloWorld/' which is not a valid URL. Consider adding URL format validation.",
+      "persona_name": "The Speed Demon",
+      "persona_icon": "⚡",
+      "element_name": "Website URL",
+      "chaos_input": "/HelloWorld/",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Website URL' element",
+        "3. Fill with input: `/HelloWorld/`",
+        "4. Observe: URL field 'Website URL' accepted non-URL input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0006",
+      "severity": "low",
+      "category": "validation",
+      "title": "URL field 'Website URL' accepted non-URL input",
+      "description": "The URL field accepted 'The site URL is: ജനങ്ങൾ ഒഴി ജലപ്പോഴി ആർതിസ്തതിനാണ്! എന്നി ശുലീഷിൻ ജോമാൻ ലക്കർ.' which is not a valid URL. Consider adding URL format validation.",
+      "persona_name": "The International Traveler",
+      "persona_icon": "🌍",
+      "element_name": "Website URL",
+      "chaos_input": "The site URL is: ജനങ്ങൾ ഒഴി ജലപ്പോഴി ആർതിസ്തതിനാണ്! എന്നി ശുലീഷിൻ ജോമാൻ ലക്കർ.",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Website URL' element",
+        "3. Fill with input: `The site URL is: ജനങ്ങൾ ഒഴി ജലപ്പോഴി ആർതിസ്തതിനാണ്! എന്നി ശുലീഷിൻ ജോമാൻ ലക്കർ.`",
+        "4. Observe: URL field 'Website URL' accepted non-URL input"
+      ]
+    }
+  ],
+  "chaos_score": {
+    "total_actions": 13,
+    "survived": 7,
+    "bugs_found": 6,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 6,
+    "score": 76.9,
+    "grade": "B+",
+    "verdict": "Good job, but some gaps need attention. 👍"
+  }
+}

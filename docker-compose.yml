@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # ---------------------------------------------
+  # Frontend Service (Next.js)
+  # ---------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+    container_name: chaos-qa-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ---------------------------------------------
+  # Backend Service (FastAPI + Playwright)
+  # ---------------------------------------------
+  backend:
+    build: 
+      context: ./backend
+    container_name: chaos-qa-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Connect to Ollama running natively on the Host OS
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      # Enables the container to reach the host machine (for Ollama local model)
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+# ==============================================================================
+# NOTE ON LLM (OLLAMA):
+# We deliberately DO NOT run Ollama inside this Docker Compose. 
+# Why? Running Ollama in Docker without proper GPU passthrough configurations 
+# severely degrades inference speed. For the best "Wow Gap" experience and 
+# 0-cost local inference, Ollama must run natively on the host machine.
+# ==============================================================================

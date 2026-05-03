@@ -1,0 +1,54 @@
+name: 'Chaos-QA Security & UI Fuzzing'
+description: 'Runs autonomous chaos testing against your web application using a local 0.6B LLM.'
+branding:
+  icon: 'zap'
+  color: 'red'
+
+inputs:
+  target_url:
+    description: 'The URL of the application to test (e.g., https://staging.myapp.com)'
+    required: true
+  duration:
+    description: 'How long to run the chaos test (in seconds)'
+    required: false
+    default: '120'
+  personas:
+    description: 'Space separated list of personas to run (or "all")'
+    required: false
+    default: 'all'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install -r backend/requirements.txt
+        playwright install chromium
+
+    - name: Install & Run Ollama (Local Model)
+      shell: bash
+      run: |
+        curl -fsSL https://ollama.com/install.sh | sh
+        ollama serve &
+        sleep 5
+        ollama pull qwen:0.5b
+
+    - name: Execute Chaos-QA Testing
+      shell: bash
+      run: |
+        python -m cli ${{ inputs.target_url }} --duration ${{ inputs.duration }} --personas ${{ inputs.personas }}
+
+    - name: Upload Bug Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: chaos-qa-bug-reports
+        path: reports/

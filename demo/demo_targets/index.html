@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable App - Chaos-QA Target</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #1a1a1a; padding: 30px; border-radius: 8px; border: 1px solid #333; width: 400px; }
+        h1 { margin-top: 0; font-size: 24px; color: #00f0ff; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: #aaa; }
+        input, textarea { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: #fff; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #00f0ff; color: #000; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #00c0cc; }
+        #output { margin-top: 20px; padding: 15px; background: #330000; border: 1px solid #ff0000; border-radius: 4px; display: none; color: #ff8888; font-family: monospace; font-size: 12px; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Portal Login</h1>
+        <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Warning: This portal is vulnerable to SQL Injection.</p>
+        
+        <div class="form-group">
+            <label for="username">Username (Admin)</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password">
+        </div>
+        
+        <button id="loginBtn">Login</button>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const user = document.getElementById('username').value;
+            const output = document.getElementById('output');
+            
+            output.style.display = 'block';
+            
+            // Simulating a vulnerable backend behavior on the frontend
+            if (user.includes("'") || user.includes("OR 1=1") || user.includes("DROP TABLE")) {
+                output.innerHTML = `[CRITICAL ERROR] SQL Syntax Error near '${user}'<br><br>Stack Trace:<br>at Database.query (/var/www/db.js:42)<br>at Auth.login (/var/www/auth.js:18)`;
+            } else if (user === "") {
+                output.innerHTML = `Error: Username cannot be empty.`;
+                output.style.background = "#333";
+                output.style.borderColor = "#666";
+                output.style.color = "#fff";
+            } else {
+                output.innerHTML = `Invalid credentials for user: ${user}`;
+                output.style.background = "#333";
+                output.style.borderColor = "#666";
+                output.style.color = "#fff";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+{
+  "scan_id": "ede66e66",
+  "timestamp": "2026-05-03T03:11:07.769123",
+  "target_url": "http://localhost:8899",
+  "duration_seconds": 65.78893733024597,
+  "total_actions": 13,
+  "pages_scanned": 1,
+  "model_used": "qwen2.5:0.5b",
+  "summary": {
+    "total_bugs": 7,
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "low": 5
+  },
+  "bugs": [
+    {
+      "bug_id": "CHAOS-0001",
+      "severity": "low",
+      "category": "validation",
+      "title": "Email field 'Email Address' accepted non-email input",
+      "description": "The email field accepted '1. First, let's define a Python function to create an email address.' which is not a valid email. Consider adding email format validation.",
+      "persona_name": "The Overthinking Dev",
+      "persona_icon": "🤓",
+      "element_name": "Email Address",
+      "chaos_input": "1. First, let's define a Python function to create an email address.",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Email Address' element",
+        "3. Fill with input: `1. First, let's define a Python function to create an email address.`",
+        "4. Observe: Email field 'Email Address' accepted non-email input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0002",
+      "severity": "low",
+      "category": "validation",
+      "title": "Email field 'Email Address' accepted non-email input",
+      "description": "The email field accepted 'ABC1234567890' which is not a valid email. Consider adding email format validation.",
+      "persona_name": "The Confused Grandma",
+      "persona_icon": "👵",
+      "element_name": "Email Address",
+      "chaos_input": "ABC1234567890",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Email Address' element",
+        "3. Fill with input: `ABC1234567890`",
+        "4. Observe: Email field 'Email Address' accepted non-email input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0003",
+      "severity": "low",
+      "category": "validation",
+      "title": "Numeric field 'Age' accepted non-numeric input",
+      "description": "The numeric field accepted 'Hello, how can I assist you today in a language other than English? I can transl' which is not a number. Consider adding numeric validation.",
+      "persona_name": "The International Traveler",
+      "persona_icon": "🌍",
+      "element_name": "Age",
+      "chaos_input": "Hello, how can I assist you today in a language other than English? I can translate text from Arabic, Chinese, Hindi, Japanese, Korean, Russian, and Unicode characters into multiple languages. Feel fr",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Age' element",
+        "3. Fill with input: `Hello, how can I assist you today in a language other than English? I can translate text from Arabic`",
+        "4. Observe: Numeric field 'Age' accepted non-numeric input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0004",
+      "severity": "low",
+      "category": "validation",
+      "title": "Numeric field 'Age' accepted non-numeric input",
+      "description": "The numeric field accepted 'Age' which is not a number. Consider adding numeric validation.",
+      "persona_name": "The Overthinking Dev",
+      "persona_icon": "🤓",
+      "element_name": "Age",
+      "chaos_input": "Age",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Age' element",
+        "3. Fill with input: `Age`",
+        "4. Observe: Numeric field 'Age' accepted non-numeric input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0005",
+      "severity": "low",
+      "category": "validation",
+      "title": "URL field 'Website URL' accepted non-URL input",
+      "description": "The URL field accepted 'Hello, there are multiple languages represented in your URL field. Some examples' which is not a valid URL. Consider adding URL format validation.",
+      "persona_name": "The International Traveler",
+      "persona_icon": "🌍",
+      "element_name": "Website URL",
+      "chaos_input": "Hello, there are multiple languages represented in your URL field. Some examples might include:  Arabic, Chinese, Hindi, Japanese, Korean, Russian, Unicode characters, special Unicode characters, and ",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Website URL' element",
+        "3. Fill with input: `Hello, there are multiple languages represented in your URL field. Some examples might include:  Ara`",
+        "4. Observe: URL field 'Website URL' accepted non-URL input"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0006",
+      "severity": "medium",
+      "category": "validation",
+      "title": "Potential Potential XSS — script tag accepted — input accepted without validation in 'Website URL'",
+      "description": "The input '- <script>alert(document.cookie)</script>' was accepted without any visible error or validation. This may indicate missing input sanitization.",
+      "persona_name": "The Accidental Hacker",
+      "persona_icon": "🏴‍☠️",
+      "element_name": "Website URL",
+      "chaos_input": "- <script>alert(document.cookie)</script>",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Website URL' element",
+        "3. Fill with input: `- <script>alert(document.cookie)</script>`",
+        "4. Observe: Potential Potential XSS — script tag accepted — input accepted without validation in 'Website URL'"
+      ]
+    },
+    {
+      "bug_id": "CHAOS-0007",
+      "severity": "medium",
+      "category": "validation",
+      "title": "Potential Potential XSS — script tag accepted — input accepted without validation in 'Bio / About You'",
+      "description": "The input '<script>alert(document.cookie)</script> {{constructor.constructor(\"return this\")' was accepted without any visible error or validation. This may indicate missing input sanitization.",
+      "persona_name": "The Accidental Hacker",
+      "persona_icon": "🏴‍☠️",
+      "element_name": "Bio / About You",
+      "chaos_input": "<script>alert(document.cookie)</script> {{constructor.constructor(\"return this\")()}}",
+      "action_type": "fill",
+      "console_errors": [],
+      "network_errors": [],
+      "url": "http://localhost:8899",
+      "reproduction_steps": [
+        "1. Navigate to http://localhost:8899",
+        "2. Find the 'Bio / About You' element",
+        "3. Fill with input: `<script>alert(document.cookie)</script> {{constructor.constructor(\"return this\")()}}`",
+        "4. Observe: Potential Potential XSS — script tag accepted — input accepted without validation in 'Bio / About You'"
+      ]
+    }
+  ],
+  "chaos_score": {
+    "total_actions": 13,
+    "survived": 6,
+    "bugs_found": 7,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 2,
+    "low_count": 5,
+    "score": 50.0,
+    "grade": "C",
+    "verdict": "Significant issues. Chaos testing revealed problems. 🔧"
+  }
+}
