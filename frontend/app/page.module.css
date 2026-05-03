@@ -761,14 +761,77 @@
   .howSection { padding: 40px 40px 60px; }
 }
 
-@media (max-width: 768px) {
-  .hero { padding: 80px 24px 40px; }
-  .heroCTA { flex-direction: column; }
-  .heroLaunchBtn { padding: 16px 24px; }
-  .proofGrid { grid-template-columns: repeat(2, 1fr); }
-  .proofBar { padding: 0 24px; }
-  .personaGrid { grid-template-columns: repeat(2, 1fr); }
-  .howGrid { grid-template-columns: 1fr; }
-  .launchSection { padding: 0 24px 60px; max-width: 100%; }
-  .howSection { padding: 40px 24px 60px; max-width: 100%; }
+/* ══════════════════════════════════════════════
+   TABLET
+══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 90px 32px 48px;
+    gap: 32px;
+    min-height: auto;
+  }
+  .heroTerminal { order: 2; }
+  .heroContent  { order: 1; }
+  .heroTitle { font-size: clamp(42px, 10vw, 80px); }
+  .proofGrid { grid-template-columns: repeat(3, 1fr); }
+  .proofBar  { padding: 0 32px; }
+  .launchSection { padding: 0 32px 64px; max-width: 100%; }
+  .howSection    { padding: 40px 32px 64px; max-width: 100%; }
+  .howGrid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ══════════════════════════════════════════════
+   MOBILE
+══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .hero { padding: 80px 20px 36px; gap: 28px; }
+  .heroTitle { font-size: clamp(36px, 13vw, 64px); letter-spacing: -2px; }
+  .heroTagline { font-size: 13px; }
+  .heroDesc    { font-size: 13px; }
+  .liveBadge   { font-size: 9px; padding: 6px 14px; }
+
+  .heroCTA { flex-direction: column; align-items: stretch; }
+  .heroLaunchBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px;
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .featurePills { gap: 6px; }
+  .featurePill  { font-size: 10px; padding: 5px 10px; }
+
+  /* Terminal: smaller on mobile */
+  .heroTerminal { display: none; } /* hide on very small screens to reduce jank */
+
+  .proofGrid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .proofBar  { padding: 0 20px; }
+  .proofValue { font-size: 22px; }
+
+  .launchPanel  { padding: 24px 20px; }
+  .launchSection { padding: 0 20px 48px; max-width: 100%; }
+  .personaGrid   { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .personaCard   { padding: 12px 8px; }
+  .personaIcon   { font-size: 20px; }
+  .launchBtn     { font-size: 14px !important; padding: 16px !important; letter-spacing: 2px; }
+
+  .howSection { padding: 32px 20px 48px; max-width: 100%; }
+  .howGrid    { grid-template-columns: 1fr; gap: 12px; }
+  .howCard    { padding: 20px 16px; }
+  .sectionTitle { font-size: 18px; letter-spacing: 4px; }
+
+  .footer { padding: 28px 20px; }
+}
+
+/* ══════════════════════════════════════════════
+   SMOOTH SCROLL + PERFORMANCE
+══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
