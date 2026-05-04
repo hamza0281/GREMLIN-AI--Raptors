@@ -64,11 +64,11 @@ export default function AnimatedBackground() {
 
     // ── Offscreen star canvas (rendered once) ──
     let starCanvas: HTMLCanvasElement | null = null;
-    const STARS = Array.from({ length: 80 }, () => ({
+    const STARS = Array.from({ length: 150 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      r: 0.4 + Math.random() * 0.8,
-      a: 0.12 + Math.random() * 0.4,
+      r: 0.6 + Math.random() * 1.2,
+      a: 0.2 + Math.random() * 0.6,
     }));
 
     function buildStarCanvas(w: number, h: number) {
@@ -135,12 +135,12 @@ export default function AnimatedBackground() {
     ];
 
     // ── Particles (minimal count) ──
-    const PARTS = Array.from({ length: 20 }, () => ({
+    const PARTS = Array.from({ length: 40 }, () => ({
       lat: Math.random() * 180 - 90,
       lon: Math.random() * 360 - 180,
-      spd: 0.12 + Math.random() * 0.25,
-      sz: 0.6 + Math.random() * 1.0,
-      tilt: (Math.random() - 0.5) * 0.4,
+      spd: 0.15 + Math.random() * 0.35,
+      sz: 1.0 + Math.random() * 1.5,
+      tilt: (Math.random() - 0.5) * 0.5,
     }));
 
     // ── Globe: draw grid + arcs + nodes to offscreen canvas ──
@@ -169,8 +169,8 @@ export default function AnimatedBackground() {
           first = false;
         }
         const isEq = Math.abs(lat) < 1;
-        gx.strokeStyle = isEq ? "rgba(0,240,255,0.25)" : "rgba(0,240,255,0.07)";
-        gx.lineWidth = isEq ? 1.0 : 0.4;
+        gx.strokeStyle = isEq ? "rgba(0,240,255,0.4)" : "rgba(0,240,255,0.15)";
+        gx.lineWidth = isEq ? 1.5 : 0.8;
         gx.stroke();
       }
 
@@ -189,7 +189,7 @@ export default function AnimatedBackground() {
           first ? gx.moveTo(p.x, p.y) : gx.lineTo(p.x, p.y);
           first = false;
         }
-        gx.strokeStyle = "rgba(0,240,255,0.06)";
+        gx.strokeStyle = "rgba(0,240,255,0.12)";
         gx.stroke();
       }
 
@@ -201,7 +201,7 @@ export default function AnimatedBackground() {
         const isRed = idx % 3 === 0;
         const col = isRed ? "255,0,64" : "0,240,255";
         const pulse = Math.sin(frame * 0.025 + idx * 0.8);
-        const alpha = 0.18 + 0.14 * pulse;
+        const alpha = 0.4 + 0.3 * pulse;
 
         gx.beginPath();
         let first = true;
@@ -218,7 +218,7 @@ export default function AnimatedBackground() {
           first = false;
         }
         gx.strokeStyle = `rgba(${col},${alpha})`;
-        gx.lineWidth = 0.9;
+        gx.lineWidth = 1.5;
         gx.stroke();
 
         // Traveling dot
@@ -231,9 +231,12 @@ export default function AnimatedBackground() {
         if (isFront(rotP)) {
           const pp = project(rotP, CX, CY, FOV);
           gx.beginPath();
-          gx.arc(pp.x, pp.y, 1.8 * pp.scale, 0, TWO_PI);
-          gx.fillStyle = `rgba(${col},0.85)`;
+          gx.arc(pp.x, pp.y, 2.5 * pp.scale, 0, TWO_PI);
+          gx.fillStyle = `rgba(${col},1.0)`;
+          gx.shadowColor = `rgba(${col},0.8)`;
+          gx.shadowBlur = 8;
           gx.fill();
+          gx.shadowBlur = 0;
         }
       });
 
@@ -246,7 +249,7 @@ export default function AnimatedBackground() {
         const pulse = Math.sin(frame * 0.04 + idx * 1.5);
         const isRed = idx % 4 === 0;
         const col = isRed ? "255,0,64" : "0,240,255";
-        const alpha = 0.6 + pulse * 0.25;
+        const alpha = 0.85 + pulse * 0.15;
 
         gx.beginPath();
         gx.arc(p.x, p.y, 2.0 * p.scale, 0, TWO_PI);
@@ -254,9 +257,9 @@ export default function AnimatedBackground() {
         gx.fill();
 
         gx.beginPath();
-        gx.arc(p.x, p.y, (4.5 + pulse) * p.scale, 0, TWO_PI);
-        gx.strokeStyle = `rgba(${col},${alpha * 0.35})`;
-        gx.lineWidth = 0.7;
+        gx.arc(p.x, p.y, (5.5 + pulse) * p.scale, 0, TWO_PI);
+        gx.strokeStyle = `rgba(${col},${alpha * 0.5})`;
+        gx.lineWidth = 1.2;
         gx.stroke();
       });
 
@@ -271,8 +274,8 @@ export default function AnimatedBackground() {
         i === 0 ? gx.moveTo(p.x, p.y) : gx.lineTo(p.x, p.y);
       }
       gx.closePath();
-      gx.strokeStyle = "rgba(0,240,255,0.09)";
-      gx.lineWidth = 0.6;
+      gx.strokeStyle = "rgba(0,240,255,0.2)";
+      gx.lineWidth = 1.0;
       gx.setLineDash([4, 10]);
       gx.stroke();
       gx.setLineDash([]);
@@ -341,7 +344,7 @@ export default function AnimatedBackground() {
       // Cheap halo (no per-frame gradient creation overhead — reuse simple arc fill)
       ctx!.beginPath();
       ctx!.arc(CX, CY, R * 1.55, 0, TWO_PI);
-      ctx!.fillStyle = "rgba(0,240,255,0.025)";
+      ctx!.fillStyle = "rgba(0,240,255,0.06)";
       ctx!.fill();
 
       // Globe from offscreen canvas
