@@ -34,29 +34,32 @@ const SEV_COLORS: Record<string, string> = {
   LOW: "#00ff88",
 };
 
-// Counter animation hook — starts on mount
-function useCountUp(target: number, duration = 1800) {
-  const [count, setCount] = useState(0);
+// Counter animation hook — optimized (modifies DOM directly to prevent React re-renders)
+function useCountUp(target: number, duration = 1800, suffix = "") {
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
-    if (started.current) return;
+    if (started.current || !ref.current) return;
     started.current = true;
     const start = performance.now();
     const step = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(ease * target));
+      if (ref.current) {
+        ref.current.innerText = Math.floor(ease * target).toLocaleString() + suffix;
+      }
       if (progress < 1) requestAnimationFrame(step);
-      else setCount(target);
+      else if (ref.current) {
+        ref.current.innerText = target.toLocaleString() + suffix;
+      }
     };
     // Slight delay to let page render first
     const t = setTimeout(() => requestAnimationFrame(step), 1200);
     return () => clearTimeout(t);
-  }, [target, duration]);
+  }, [target, duration, suffix]);
 
-  return { count, ref };
+  return ref;
 }
 
 // Glitch text component — direct span, gradient via CSS
@@ -94,10 +97,10 @@ export default function Home() {
   const [tickerIndex, setTickerIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
 
-  const bugsCount = useCountUp(12847);
-  const scansCount = useCountUp(934);
-  const xssCount = useCountUp(3291);
-  const critCount = useCountUp(489);
+  const bugsCount = useCountUp(12847, 1800, "+");
+  const scansCount = useCountUp(934, 1800, "+");
+  const xssCount = useCountUp(3291, 1800, "");
+  const critCount = useCountUp(489, 1800, "");
 
   useEffect(() => {
     setMounted(true);
@@ -244,20 +247,20 @@ export default function Home() {
       <section className={styles.proofBar}>
         <div className={styles.proofDivider} />
         <div className={styles.proofGrid}>
-          <div className={styles.proofStat} ref={bugsCount.ref}>
-            <div className={styles.proofValue}>{bugsCount.count.toLocaleString()}+</div>
+          <div className={styles.proofStat}>
+            <div className={styles.proofValue} ref={bugsCount}>0+</div>
             <div className={styles.proofLabel}>Bugs Smashed</div>
           </div>
-          <div className={styles.proofStat} ref={scansCount.ref}>
-            <div className={styles.proofValue}>{scansCount.count}+</div>
+          <div className={styles.proofStat}>
+            <div className={styles.proofValue} ref={scansCount}>0+</div>
             <div className={styles.proofLabel}>Apps Scanned</div>
           </div>
-          <div className={styles.proofStat} ref={xssCount.ref}>
-            <div className={`${styles.proofValue} ${styles.proofRed}`}>{xssCount.count.toLocaleString()}</div>
+          <div className={styles.proofStat}>
+            <div className={`${styles.proofValue} ${styles.proofRed}`} ref={xssCount}>0</div>
             <div className={styles.proofLabel}>XSS Vectors Found</div>
           </div>
-          <div className={styles.proofStat} ref={critCount.ref}>
-            <div className={`${styles.proofValue} ${styles.proofOrange}`}>{critCount.count}</div>
+          <div className={styles.proofStat}>
+            <div className={`${styles.proofValue} ${styles.proofOrange}`} ref={critCount}>0</div>
             <div className={styles.proofLabel}>Critical Bugs</div>
           </div>
           <div className={styles.proofStat}>
