@@ -34,33 +34,7 @@ const SEV_COLORS: Record<string, string> = {
   LOW: "#00ff88",
 };
 
-// Counter animation hook — optimized (modifies DOM directly to prevent React re-renders)
-function useCountUp(target: number, duration = 1800, suffix = "") {
-  const ref = useRef<HTMLDivElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    if (started.current || !ref.current) return;
-    started.current = true;
-    const start = performance.now();
-    const step = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      if (ref.current) {
-        ref.current.innerText = Math.floor(ease * target).toLocaleString() + suffix;
-      }
-      if (progress < 1) requestAnimationFrame(step);
-      else if (ref.current) {
-        ref.current.innerText = target.toLocaleString() + suffix;
-      }
-    };
-    // Slight delay to let page render first
-    const t = setTimeout(() => requestAnimationFrame(step), 1200);
-    return () => clearTimeout(t);
-  }, [target, duration, suffix]);
-
-  return ref;
-}
+// Fake data countUp hook removed
 
 // Glitch text component — direct span, gradient via CSS
 function GlitchText({ text, className }: { text: string; className?: string }) {
@@ -96,11 +70,6 @@ export default function Home() {
   const [isLaunching, setIsLaunching] = useState(false);
   const [tickerIndex, setTickerIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-
-  const bugsCount = useCountUp(12847, 1800, "+");
-  const scansCount = useCountUp(934, 1800, "+");
-  const xssCount = useCountUp(3291, 1800, "");
-  const critCount = useCountUp(489, 1800, "");
 
   useEffect(() => {
     setMounted(true);
@@ -155,11 +124,7 @@ export default function Home() {
 
         <div className={`${styles.heroContent} ${mounted ? styles.heroVisible : ""}`}>
 
-          {/* ── Live Status Badge ── */}
-          <div className={styles.liveBadge}>
-            <span className={styles.liveDot} />
-            <span>LIVE · 934 scans running · 12,847 bugs found today</span>
-          </div>
+          {/* Live badge removed as per request to not show fake data */}
 
           {/* ── Main Title ── */}
           <h1 className={styles.heroTitle}>
@@ -218,7 +183,7 @@ export default function Home() {
             <span className={styles.terminalDot} style={{ background: "#ff5f57" }} />
             <span className={styles.terminalDot} style={{ background: "#febc2e" }} />
             <span className={styles.terminalDot} style={{ background: "#28c840" }} />
-            <span className={styles.terminalTitle}>gremlin-ai — live attack stream</span>
+            <span className={styles.terminalTitle}>gremlin-ai — example attack pattern</span>
           </div>
           <div className={styles.terminalBody}>
             <div className={styles.terminalPrompt}>
@@ -234,46 +199,14 @@ export default function Home() {
             </div>
             <div className={styles.terminalCursor}>
               <span className="text-green font-mono">→</span>
-              <span className="font-mono text-cyan" style={{ fontSize: 11 }}> scan running</span>
+              <span className="font-mono text-cyan" style={{ fontSize: 11 }}> demo stream</span>
               <span className={styles.cursorBlink}>_</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          SOCIAL PROOF STATS BAR
-      ══════════════════════════════════════════════ */}
-      <section className={styles.proofBar}>
-        <div className={styles.proofDivider} />
-        <div className={styles.proofGrid}>
-          <div className={styles.proofStat}>
-            <div className={styles.proofValue} ref={bugsCount}>0+</div>
-            <div className={styles.proofLabel}>Bugs Smashed</div>
-          </div>
-          <div className={styles.proofStat}>
-            <div className={styles.proofValue} ref={scansCount}>0+</div>
-            <div className={styles.proofLabel}>Apps Scanned</div>
-          </div>
-          <div className={styles.proofStat}>
-            <div className={`${styles.proofValue} ${styles.proofRed}`} ref={xssCount}>0</div>
-            <div className={styles.proofLabel}>XSS Vectors Found</div>
-          </div>
-          <div className={styles.proofStat}>
-            <div className={`${styles.proofValue} ${styles.proofOrange}`} ref={critCount}>0</div>
-            <div className={styles.proofLabel}>Critical Bugs</div>
-          </div>
-          <div className={styles.proofStat}>
-            <div className={styles.proofValue}>$0</div>
-            <div className={styles.proofLabel}>Operational Cost</div>
-          </div>
-          <div className={styles.proofStat}>
-            <div className={styles.proofValue}>0.5B</div>
-            <div className={styles.proofLabel}>Model Parameters</div>
-          </div>
-        </div>
-        <div className={styles.proofDivider} />
-      </section>
+      {/* Fake Social Stats Bar Removed */}
 
       {/* ══════════════════════════════════════════════
           LAUNCH PANEL

@@ -1071,15 +1071,4 @@
   }
 }
 
-/* ══════════════════════════════════════════════
-   SMOOTH SCROLL + PERFORMANCE
-══════════════════════════════════════════════ */
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+/* Removed global prefers-reduced-motion to fix pure selector error, moved to globals.css */

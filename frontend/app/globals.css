@@ -371,3 +371,15 @@ body::after {
 .text-muted { color: var(--text-secondary); }
 .font-mono { font-family: var(--font-mono); }
 .font-display { font-family: var(--font-display); }
+
+/* ══════════════════════════════════════════════
+   SMOOTH SCROLL + PERFORMANCE
+══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
