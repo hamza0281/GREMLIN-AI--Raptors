@@ -135,7 +135,7 @@ export default function AnimatedBackground() {
     ];
 
     // ── Particles (minimal count) ──
-    const PARTS = Array.from({ length: 12 }, () => ({
+    const PARTS = Array.from({ length: 20 }, () => ({
       lat: Math.random() * 180 - 90,
       lon: Math.random() * 360 - 180,
       spd: 0.12 + Math.random() * 0.25,
@@ -148,9 +148,9 @@ export default function AnimatedBackground() {
       const gx = gc.getContext("2d")!;
       gx.clearRect(0, 0, W, H);
 
-      const SEG_GRID = 20;
-      const LAT = 6;
-      const LON = 8;
+      const SEG_GRID = 30;
+      const LAT = 8;
+      const LON = 10;
 
       gx.lineWidth = 0.5;
 
@@ -194,7 +194,7 @@ export default function AnimatedBackground() {
       }
 
       // Arcs
-      const SEG_ARC = 10;
+      const SEG_ARC = 20;
       ARCS.forEach(([ai, bi], idx) => {
         const A = CITIES[ai], B = CITIES[bi];
         if (!A || !B) return;
